@@ -7,7 +7,7 @@ import {
   Flex,
   Spacer,
   Heading,
-  Image,
+  extendTheme,
 } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { PublicKey, Transaction } from "@solana/web3.js"
@@ -18,14 +18,9 @@ import {
   connection,
   globalLevel1GameDataAccount,
 } from "@/utils/anchor"
-
-const images = [
-  "../images/image.jpeg",
-  "../images/image2.jpg",
-  "../images/mai1.jpg",
-  "../images/mai2.jpg",
-];
-
+//import image  from "@/public/image.jpeg"
+import React from "react"
+//import mai from '../public/mai1.jpeg'
 type GameDataAccount = {
   playerPosition: number
 }
@@ -41,17 +36,23 @@ export default function Home() {
   const [message, setMessage] = useState("")
   const [gameDataAccount, setGameDataAccount] =
     useState<GameDataAccount | null>(null)
-  const [currentImage, setCurrentImage] = useState(0); // State for the current image index
+  const colors = {
+    white: "white"
+  }
 
+  
   const updatePlayerPosition = (position: number) => {
+  //  let maiImage = null
     switch (position) {
       case 0:
         setPlayerPosition("PC !! I Need you to turn off the main reactor before it's too late we have 60 seconds left before the world destroyed forever!! say mai while trying to hold off the forces of destruction")
         setMessage("Final act : Defiance")
+       // maiImage=mai;
         break
       case 1:
         setPlayerPosition("nods in understanding. With determination in their eyes, the PC knows what they must do. They sprint towards the main reactor, dodging debris and enemy fire as they go. Time is ticking away, each second feeling like an eternity")
         setMessage("")
+       // maiImage=mai;
         break
       case 2:
         setPlayerPosition("Meanwhile, Mai holds off the advancing forces of destruction with all her strength, buying the PC precious moments to reach the reactor.")
@@ -230,15 +231,15 @@ export default function Home() {
   }, [connection, globalLevel1GameDataAccount, program])
 
   return (
-    <Box>
+    <Box backgroundImage = "url('./image3.jpeg')">
       <Flex px={4} py={4}>
         <Spacer />
         <WalletMultiButton />
       </Flex>
       <VStack justifyContent="center" alignItems="center" height="75vh">
         <VStack>
-          <Heading fontSize="s">{message}</Heading>
-          <Text fontSize="s">{playerPosition}</Text>
+          <Heading fontSize="s" backgroundColor= "white" >{message}</Heading>
+          <Text fontSize="s" backgroundColor= "white">{playerPosition}</Text>
           <HStack>
             <Button
               width="100px"
